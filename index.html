@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudentHub | Student Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <span class="brand-icon">S</span>
+            <span>StudentHub</span>
+        </div>
+
+        <p class="menu-label">MAIN MENU</p>
+
+        <a class="nav-link active" href="#dashboard">
+            ▦ <span>Dashboard</span>
+        </a>
+
+        <a class="nav-link" href="#students">
+            ♙ <span>Students</span>
+        </a>
+
+        <!-- ADMIN ACCOUNT -->
+        <div class="sidebar-bottom">
+
+            <button
+                class="profile-button"
+                id="adminAccountBtn"
+                type="button"
+                aria-expanded="false"
+                aria-controls="adminDropdown"
+            >
+
+                <div class="profile-avatar">A</div>
+
+                <div class="profile-info">
+                    <strong>Administrator</strong>
+                    <small>Admin account</small>
+                </div>
+
+                <span class="profile-arrow">⌄</span>
+
+            </button>
+
+            <!-- ADMIN ACCOUNT DROPDOWN -->
+            <div class="admin-dropdown" id="adminDropdown" hidden>
+
+                <h3>Admin Account</h3>
+
+                <div class="admin-details">
+
+                    <div class="profile-avatar">A</div>
+
+                    <div>
+                        <strong>Administrator</strong>
+                        <small>System Administrator</small>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="account-information">
+
+                    <p>
+                        <strong>Account:</strong>
+                        Admin
+                    </p>
+
+                    <p>
+                        <strong>Role:</strong>
+                        Administrator
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="account-active">Active</span>
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="closeAdminDropdown"
+                    class="close-account-btn"
+                >
+                    Close Account Panel
+                </button>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP HEADER -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">OVERVIEW</p>
+                <h1>Dashboard</h1>
+            </div>
+
+            <div class="top-right">
+                <span class="online-dot"></span>
+                System Online
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME SECTION -->
+        <section class="welcome">
+
+            <div>
+                <p class="eyebrow light">
+                    STUDENT MANAGEMENT SYSTEM
+                </p>
+
+                <h2>Welcome back, Admin!</h2>
+
+                <p>
+                    Manage student records in one simple place.
+                </p>
+            </div>
+
+            <div class="welcome-mark">✦</div>
+
+        </section>
+
+
+        <!-- DASHBOARD STATISTICS -->
+        <section class="stats" id="dashboard">
+
+            <article class="stat-card">
+
+                <div class="stat-icon purple">♙</div>
+
+                <p>Total Students</p>
+
+                <strong id="totalStudents">0</strong>
+
+                <small>Registered students</small>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon pink">▤</div>
+
+                <p>Courses</p>
+
+                <strong id="totalCourses">0</strong>
+
+                <small>Different courses</small>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon blue">＋</div>
+
+                <p>Added Today</p>
+
+                <strong id="addedToday">0</strong>
+
+                <small>New registrations today</small>
+
+            </article>
+
+        </section>
+
+
+        <!-- STUDENT RECORDS -->
+        <section class="content-card" id="students">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">RECORD MANAGEMENT</p>
+
+                    <h2>Student Records</h2>
+
+                    <p class="subtext">
+                        View, add, edit, and remove student information.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="addStudentBtn"
+                    type="button"
+                >
+                    ＋ Add Student
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH AND FILTER -->
+            <div class="toolbar">
+
+                <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Search Student"
+                    aria-label="Search students"
+                >
+
+                <select
+                    id="courseFilter"
+                    aria-label="Filter by course"
+                >
+
+                    <option value="">All courses</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- STUDENT TABLE -->
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>STUDENT</th>
+                            <th>EMAIL</th>
+                            <th>COURSE</th>
+                            <th>YEAR LEVEL</th>
+                            <th>ACTIONS</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentTable">
+
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Loading student records...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p class="table-footer" id="recordCount">
+                0 students
+            </p>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+            © 2026 StudentHub. Student Management Dashboard.
+        </footer>
+
+    </main>
+
+
+    <!-- ADD / EDIT STUDENT MODAL -->
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+
+        <section
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
+
+            <div class="modal-head">
+
+                <div>
+
+                    <p class="eyebrow">
+                        STUDENT INFORMATION
+                    </p>
+
+                    <h2 id="modalTitle">Add Student</h2>
+
+                </div>
+
+                <button
+                    class="icon-btn"
+                    id="closeModal"
+                    type="button"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- STUDENT FORM -->
+            <form id="studentForm">
+
+                <label>
+                    First Name
+
+                    <input
+                        name="first_name"
+                        required
+                        maxlength="60"
+                        placeholder="e.g. Juan"
+                    >
+                </label>
+
+
+                <label>
+                    Last Name
+
+                    <input
+                        name="last_name"
+                        required
+                        maxlength="60"
+                        placeholder="e.g. Dela Cruz"
+                    >
+                </label>
+
+
+                <label>
+                    Email Address
+
+                    <input
+                        name="email"
+                        type="email"
+                        required
+                        maxlength="120"
+                        placeholder="student@email.com"
+                    >
+                </label>
+
+
+                <label>
+                    Course
+
+                    <input
+                        name="course"
+                        required
+                        maxlength="100"
+                        placeholder="e.g. BS Information Technology"
+                    >
+                </label>
+
+
+                <label>
+                    Year Level
+
+                    <select name="year_level" required>
+
+                        <option value="">
+                            Select year level
+                        </option>
+
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+
+                    </select>
+
+                </label>
+
+
+                <p
+                    class="form-error"
+                    id="formError"
+                    role="alert"
+                ></p>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancelBtn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        type="submit"
+                        id="saveBtn"
+                    >
+                        Save Student
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+    <!-- TOAST NOTIFICATION -->
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+
+    <!-- ADMIN ACCOUNT JAVASCRIPT -->
+    <script>
+
+        const adminAccountBtn =
+            document.getElementById("adminAccountBtn");
+
+        const adminDropdown =
+            document.getElementById("adminDropdown");
+
+        const closeAdminDropdown =
+            document.getElementById("closeAdminDropdown");
+
+
+        // OPEN AND CLOSE ADMIN ACCOUNT
+        adminAccountBtn.addEventListener("click", function(event) {
+
+            event.stopPropagation();
+
+            const isOpening = adminDropdown.hidden;
+
+            adminDropdown.hidden = !isOpening;
+
+            adminAccountBtn.setAttribute(
+                "aria-expanded",
+                String(isOpening)
+            );
+
+        });
+
+
+        // CLOSE ACCOUNT PANEL BUTTON
+        closeAdminDropdown.addEventListener("click", function() {
+
+            adminDropdown.hidden = true;
+
+            adminAccountBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        });
+
+
+        // CLOSE WHEN CLICKING OUTSIDE
+        document.addEventListener("click", function(event) {
+
+            if (
+                !adminAccountBtn.contains(event.target) &&
+                !adminDropdown.contains(event.target)
+            ) {
+
+                adminDropdown.hidden = true;
+
+                adminAccountBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+
+
+        // CLOSE USING ESCAPE KEY
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                adminDropdown.hidden = true;
+
+                adminAccountBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
