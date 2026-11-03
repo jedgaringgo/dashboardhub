@@ -1,5 +1,5 @@
 
-const API = "http://localhost:3000/api";
+const API = "https://studenthub-backend-d5ve.onrender.com/api";
 
 const tableBody = document.getElementById("studentTable");
 const modal = document.getElementById("modalBackdrop");
